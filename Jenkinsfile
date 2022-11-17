@@ -25,17 +25,19 @@ pipeline {
                 bat "docker build . -t server:latest"
             }
         }
-        environment {
-            REMOVE = true
-        }
+        
         stage('Run Docker') {
+            environment {
+                REMOVE = true
+            }
             steps {                
                 bat "docker run -itd -p 3000:3000 --name server server:latest"                
             }   
+            environment {
+                KILL = true
+            }
         }
-        environment {
-            KILL = true
-        }
+        
         stage('run tests') {
             steps {
                 bat "curl http://localhost:3000/"
