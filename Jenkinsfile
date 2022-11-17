@@ -44,11 +44,11 @@ pipeline {
                 bat "docker rm server"
             }   
         }  
-        post { 
-            always { 
-                bat "docker kill server"
-                bat "docker rm server"
-            }
-        }
     }
+    post { 
+        always { 
+            bat "docker kill server"
+            bat "docker rm server"
+        }
+    }    
 }
