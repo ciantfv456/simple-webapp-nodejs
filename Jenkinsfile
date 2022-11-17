@@ -56,7 +56,7 @@ pipeline {
         }
         when {
           expression {
-            env.KILL == true 
+            env.REMOVE == true 
           }
         }
         steps {            
