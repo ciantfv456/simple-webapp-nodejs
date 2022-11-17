@@ -3,6 +3,9 @@ pipeline {
     triggers { 
         cron('* * * * *')   
     }
+    parameters {
+        string(name: "name", defaultValue: "Ben", description: "My name")
+    }
     stages {
         stage('Clean Workspace') {
             steps {
