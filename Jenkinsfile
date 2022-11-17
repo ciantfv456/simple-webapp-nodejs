@@ -27,21 +27,25 @@ pipeline {
                 bat "docker build . -t server:latest"
             }
         }
-        stage('Run Docker') {
-            steps {
-                bat "docker run -itd -p 3000:8765 --name node-server server:latest"
-            }   
+        try {
+            stage('Run Docker') {
+                steps {
+                    bat "docker run -itd -p 3000:3000 --name server server:latest"
+                }   
+            }
+            stage('CURL') {
+                steps {
+                    bat "curl http://localhost:3000/"
+                }   
+            }
         }
-        stage('CURL') {
-            steps {
-                bat "curl http://localhost:8765/"
-            }   
+        finally {
+            stage('Kill Docker') {
+                steps {
+                    bat "docker kill server"
+                    bat "docker rm server"
+                }   
+            }        
         }
-        stage('Kill Docker') {
-            steps {
-                bat "docker kill node-server"
-                bat "docker rm node-server"
-            }   
-        }        
     }
 }
