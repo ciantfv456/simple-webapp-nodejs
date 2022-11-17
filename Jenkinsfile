@@ -12,16 +12,6 @@ pipeline {
                 git 'https://github.com/ciantfv456/simple-webapp-nodejs.git'
             }
         }
-        stage('Build') {
-            steps {
-                bat "npm install"
-            }
-        }
-        stage('Run Tests') {
-            steps {
-                bat "npm test"
-            }
-        }
         stage('Build Docker') {
             steps {
                 bat "docker build . -t server:latest"
