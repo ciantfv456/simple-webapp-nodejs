@@ -13,6 +13,11 @@ pipeline {
                 git 'https://github.com/ciantfv456/simple-webapp-nodejs.git'
             }
         }
+        stage('Say My Name') {
+            steps {
+                echo $name
+            }
+        }
         stage('Build Docker') {
             steps {
                 bat "docker build . -t server:latest"
