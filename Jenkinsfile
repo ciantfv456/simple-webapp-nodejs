@@ -19,7 +19,8 @@ pipeline {
         stage('Say My Name') {
             steps {
                 echo "${name}"
-                echo "${buildImage}"
+                ciConfig = readYaml(text: libraryResource('environments.yml'))
+                echo "${ciConfig.buildImage}"
             }
         }
         stage('Build Docker') {
