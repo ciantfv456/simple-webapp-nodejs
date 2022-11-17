@@ -46,21 +46,15 @@ pipeline {
         }
     }
     post { 
-        when {
-          expression {
-            env.KILL == true 
-          }
-        }
-        steps {
-            bat "docker kill server"
-        }
-        when {
-          expression {
-            env.REMOVE == true 
-          }
-        }
-        steps {            
-            bat "docker rm server"
-        }
-    }    
+        always {          
+            script {
+                if (env.KILL == true) {
+                    bat "docker kill server"
+                }
+                if (env.REMOVE == true) {
+                    bat "docker rm server"
+                }                         
+            }
+        }    
+    }
 }
