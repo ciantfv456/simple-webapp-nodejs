@@ -37,5 +37,11 @@ pipeline {
                 bat "curl http://localhost:3000/"
             }   
         }
+        stage('Kill Docker') {
+            steps {
+                bat "docker kill server"
+                bat "docker rm server"
+            }   
+        }        
     }
 }
