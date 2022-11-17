@@ -1,10 +1,12 @@
 pipeline {
     agent { label "windows" }
+    environment {
+        KILL = false
+        REMOVE = false
+    }
     stages {
         stage('Clean Workspace') {
             steps {
-                KILL = false
-                REMOVE = false
                 cleanWs()
             }
         }
@@ -23,12 +25,16 @@ pipeline {
                 bat "docker build . -t server:latest"
             }
         }
+        environment {
+            REMOVE = true
+        }
         stage('Run Docker') {
-            steps {
-                REMOVE = true
-                bat "docker run -itd -p 3000:3000 --name server server:latest"
-                KILL = true
+            steps {                
+                bat "docker run -itd -p 3000:3000 --name server server:latest"                
             }   
+        }
+        environment {
+            KILL = true
         }
         stage('run tests') {
             steps {
