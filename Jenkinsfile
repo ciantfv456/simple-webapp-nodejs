@@ -22,9 +22,10 @@ pipeline {
                 bat "docker run -itd -p 3000:3000 --name server server:latest"
             }   
         }
-        stage('CURL') {
+        stage('run tests') {
             steps {
                 bat "curl http://localhost:3000/"
+                bat "python test.py"
             }   
         }
     }
