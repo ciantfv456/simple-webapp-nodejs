@@ -6,7 +6,9 @@ pipeline {
     parameters {
         string(name: "name", defaultValue: "Ben", description: "My name")
     }
-    buildDiscarder(logRotator(numToKeepStr: '5')) }
+    options: {
+        buildDiscarder(logRotator(numToKeepStr: '5')) 
+    }
     stages {
         stage('Clean Workspace') {
             steps {
