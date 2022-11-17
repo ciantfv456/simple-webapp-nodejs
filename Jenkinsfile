@@ -6,7 +6,7 @@ pipeline {
     parameters {
         string(name: "name", defaultValue: "Ben", description: "My name")
     }
-    options: {
+    options {
         buildDiscarder(logRotator(numToKeepStr: '5')) 
     }
     stages {
