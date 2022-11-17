@@ -29,12 +29,12 @@ pipeline {
         }
         stage('Run Docker') {
             steps {
-                bat "docker run -itd -p 3000:3000 --name node-server server:latest"
+                bat "docker run -itd -p 3000:8765 --name node-server server:latest"
             }   
         }
         stage('CURL') {
             steps {
-                bat "curl http://localhost:3000/"
+                bat "curl http://localhost:8765/"
             }   
         }
         stage('Kill Docker') {
