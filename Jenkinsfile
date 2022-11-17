@@ -1,14 +1,5 @@
 pipeline {
     agent { label "windows" }
-    triggers { 
-        cron('* * * * *')   
-    }
-    parameters {
-        string(name: "name", defaultValue: "Ben", description: "My name")
-    }
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '5')) 
-    }
     stages {
         stage('Clean Workspace') {
             steps {
