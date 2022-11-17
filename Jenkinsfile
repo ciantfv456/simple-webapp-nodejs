@@ -1,8 +1,8 @@
 pipeline {
     agent { label "windows" }
     environment {
-        env.KILL = false
-        env.REMOVE = false
+        KILL = "false"
+        REMOVE = "false"
     }
     stages {
         stage('Clean Workspace') {
@@ -28,7 +28,7 @@ pipeline {
         
         stage('Run Docker') {
             environment {
-                env.REMOVE = true
+                env.REMOVE = "true"
             }
             steps {                
                 bat "docker run -itd -p 3000:3000 --name server server:latest"                
@@ -37,7 +37,7 @@ pipeline {
         
         stage('run tests') {
             environment {
-                env.KILL = true
+                env.KILL = "true"
             }
             steps {
                 bat "curl http://localhost:3000/"
@@ -48,10 +48,10 @@ pipeline {
     post { 
         always {          
             script {
-                if (env.KILL == true) {
+                if (env.KILL == "true") {
                     bat "docker kill server"
                 }
-                if (env.REMOVE == true) {
+                if (env.REMOVE == "true") {
                     bat "docker rm server"
                 }                         
             }
