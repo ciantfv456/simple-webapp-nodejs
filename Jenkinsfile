@@ -1,4 +1,4 @@
-@Library('my-library@main) _
+@Library('my-library@main') _
 pipeline {
     agent { label "windows" }
     stages {
