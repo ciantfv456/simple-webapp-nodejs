@@ -1,3 +1,4 @@
+@Library('my-library@main) _
 pipeline {
     agent { label "windows" }
     stages {
@@ -22,7 +23,7 @@ pipeline {
         }
         stage('Build Docker') {
             steps {
-                bat "docker build . -t server:latest"
+                dockerBuild(context: '.', tag: 'latest')
             }
         }
         
