@@ -22,5 +22,20 @@ pipeline {
                 bat "npm test"
             }
         }
+        stage('Build Docker') {
+            steps {
+                bat "docker build . -t server:latest"
+            }
+        }
+        stage('Run Docker') {
+            steps {
+                bat "docker run -itd -p 3000:3000 --name server server:latest"
+            }   
+        }
+        stage('CURL') {
+            steps {
+                bat "curl http://localhost:3000/"
+            }   
+        }
     }
 }
