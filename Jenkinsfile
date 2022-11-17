@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Say My Name') {
             steps {
-                echo $name
+                echo ${name}
             }
         }
         stage('Build Docker') {
