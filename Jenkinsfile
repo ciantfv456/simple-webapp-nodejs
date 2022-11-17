@@ -48,6 +48,7 @@ pipeline {
     post { 
         always {          
             script {
+                bat "echo ${env.KILL} | ${KILL}"
                 if (env.KILL == "true") {
                     bat "docker kill server"
                 }
