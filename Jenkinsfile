@@ -28,7 +28,7 @@ pipeline {
         
         stage('Run Docker') {
             environment {
-                env.REMOVE = "true"
+                REMOVE = "true"
             }
             steps {                
                 bat "docker run -itd -p 3000:3000 --name server server:latest"                
@@ -37,7 +37,7 @@ pipeline {
         
         stage('run tests') {
             environment {
-                env.KILL = "true"
+                KILL = "true"
             }
             steps {
                 bat "curl http://localhost:3000/"
