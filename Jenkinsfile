@@ -1,5 +1,8 @@
 pipeline {
     agent { label "windows" }
+    triggers { 
+        cron('* * * * *')   
+    }
     stages {
         stage('Clean Workspace') {
             steps {
