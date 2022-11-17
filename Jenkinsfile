@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Run Docker') {
             steps {
-                bat "docker run -itd -p 3000:3000 --name server server:latest"
+                bat "docker run -itd -p 3000:3000 --name node-server server:latest"
             }   
         }
         stage('CURL') {
@@ -39,8 +39,8 @@ pipeline {
         }
         stage('Kill Docker') {
             steps {
-                bat "docker kill server"
-                bat "docker rm server"
+                bat "docker kill node-server"
+                bat "docker rm node-server"
             }   
         }        
     }
