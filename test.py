@@ -5,5 +5,5 @@ driver = webdriver.Chrome('./chromedriver')
 
 driver.get("http://localhost:3000")
 print(driver.title)
-assert driver.title == 'Express'
+assert driver.title == 'Expres'
 driver.close()
