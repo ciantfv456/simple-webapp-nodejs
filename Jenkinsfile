@@ -32,13 +32,13 @@ pipeline {
             }
             steps {                
                 bat "docker run -itd -p 3000:3000 --name server server:latest"                
-            }   
-            environment {
-                KILL = true
-            }
+            }               
         }
         
         stage('run tests') {
+            environment {
+                KILL = true
+            }
             steps {
                 bat "curl http://localhost:3000/"
                 bat "python test.py"
