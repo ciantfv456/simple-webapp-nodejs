@@ -1,10 +1,10 @@
 pipeline {
     agent { label "windows" }
-    def killContainer = false
-    def removeContainer = false
     stages {
         stage('Clean Workspace') {
             steps {
+                KILL = false
+                REMOVE = false
                 cleanWs()
             }
         }
@@ -25,9 +25,9 @@ pipeline {
         }
         stage('Run Docker') {
             steps {
-                removeContainer = true
+                REMOVE = true
                 bat "docker run -itd -p 3000:3000 --name server server:latest"
-                killContainer = true
+                KILL = true
             }   
         }
         stage('run tests') {
@@ -39,10 +39,10 @@ pipeline {
     }
     post { 
         always { 
-            if (killContainer) {
+            if (env.KILL) {
                 bat "docker kill server"
             }
-            if (removeContainer) {
+            if (env.REMOVE) {
                 bat "docker rm server"
             }
         }
